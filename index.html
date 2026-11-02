@@ -2,31 +2,46 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="證書人 SAA-C03 互動溫書站：練習題、知識卡、弱點進度追蹤。">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="證書人 SAA-C03 互動溫書站：中英切換、練習題、知識卡、弱點追蹤。">
+<meta name="theme-color" content="#232f3e">
 <title>證書人 · AWS SAA-C03 溫書站</title>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <header>
   <div class="in">
-    <h1 id="logo" title="首頁">證書人 · AWS <span>SAA-C03</span></h1>
-    <nav aria-label="主導覽">
-      <button type="button" data-view="home">首頁</button>
-      <button type="button" data-view="quiz">練習題</button>
-      <button type="button" data-view="cards">知識卡</button>
-      <button type="button" data-view="progress">進度</button>
+    <h1 id="logo" title="Home">證書人 · AWS <span>SAA-C03</span></h1>
+    <nav class="desk-nav" aria-label="Main">
+      <button type="button" data-view="home" data-i18n="nav_home">首頁</button>
+      <button type="button" data-view="quiz" data-i18n="nav_quiz">練習題</button>
+      <button type="button" data-view="cards" data-i18n="nav_cards">知識卡</button>
+      <button type="button" data-view="progress" data-i18n="nav_progress">進度</button>
     </nav>
-    <button class="ibtn" id="theme" type="button" title="切換深色模式" aria-label="切換深色模式">🌓</button>
+    <div class="hdr-actions">
+      <button class="ibtn lang-toggle" id="langBtn" type="button" title="Language / 語言" aria-label="Toggle language">中 / EN</button>
+      <button class="ibtn" id="theme" type="button" title="Theme" aria-label="Toggle dark mode">🌓</button>
+    </div>
   </div>
 </header>
+
 <main id="app"></main>
-<footer>
+
+<nav class="mobile-nav" aria-label="Mobile">
+  <button type="button" data-view="home"><span class="mic">🏠</span><span data-i18n="nav_home">首頁</span></button>
+  <button type="button" data-view="quiz"><span class="mic">📝</span><span data-i18n="nav_quiz">練習題</span></button>
+  <button type="button" data-view="cards"><span class="mic">🎴</span><span data-i18n="nav_cards">知識卡</span></button>
+  <button type="button" data-view="progress"><span class="mic">📊</span><span data-i18n="nav_progress">進度</span></button>
+</nav>
+
+<footer id="siteFooter">
   證書人溫書站 · 非官方工具，與 AWS 無隸屬關係。
   練習題改編自 <a href="https://github.com/ChathurangaVKD/AWS-Certified-Solutions-Architect-Associate-SAA-C03" rel="noopener">ChathurangaVKD/SAA-C03</a>（MIT）。
   進度僅存在你的瀏覽器。
 </footer>
+
 <script src="js/questions.js"></script>
+<script src="js/questions-bilingual.js"></script>
 <script src="js/flashcards.js"></script>
 <script src="js/app.js"></script>
 </body>
