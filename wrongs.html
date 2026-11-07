@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="SAA-C03 錯題複習：情境、你揀、正解、點解、口訣。">
+<title>錯題複習 · 證書人 SAA-C03</title>
+<style>
+  :root {
+    --bg:#0b1220; --panel:#111827; --card:#1e293b; --text:#f8fafc; --muted:#94a3b8;
+    --yellow:#fde68a; --red:#fca5a5; --green:#86efac; --blue:#93c5fd; --accent:#38bdf8;
+    --border:#334155;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
+  a{color:var(--accent);text-decoration:none}
+  header{position:sticky;top:0;z-index:20;background:rgba(17,24,39,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .in{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  h1{font-size:1.05rem;margin:0;flex:1}
+  h1 span{color:var(--accent)}
+  .btn{border:1px solid var(--border);background:#1e293b;color:var(--text);border-radius:10px;padding:8px 12px;font:inherit;cursor:pointer}
+  .btn:active{transform:scale(.98)}
+  .btn.on{background:#0ea5e9;border-color:#0ea5e9;color:#06202b;font-weight:700}
+  main{max-width:920px;margin:0 auto;padding:14px 14px 80px}
+  .score{background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+  .score strong{color:var(--accent)}
+  .score .weak{color:var(--red);font-weight:700}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px;font-size:.82rem;color:var(--muted)}
+  .legend i{font-style:normal;padding:2px 8px;border-radius:999px;background:#1e293b}
+  .legend .y{color:var(--yellow)}.legend .r{color:var(--red)}.legend .g{color:var(--green)}.legend .b{color:var(--blue)}
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+  .tabs .btn{white-space:nowrap;flex:0 0 auto}
+  .search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:var(--text);font:inherit;margin-bottom:14px}
+  .meta{color:var(--muted);font-size:.9rem;margin:0 0 12px}
+  .grid{display:grid;gap:12px}
+  .mc{background:var(--card);border-radius:14px;padding:14px 14px 12px;border-left:5px solid var(--accent);box-shadow:0 1px 0 rgba(255,255,255,.03)}
+  .mc:nth-child(4n+1){border-left-color:#f87171}
+  .mc:nth-child(4n+2){border-left-color:#34d399}
+  .mc:nth-child(4n+3){border-left-color:#60a5fa}
+  .mc:nth-child(4n+4){border-left-color:#fbbf24}
+  .qid{display:inline-block;font-size:.72rem;color:var(--muted);background:#0f172a;border:1px solid var(--border);border-radius:999px;padding:1px 8px;margin-right:6px;vertical-align:middle}
+  .k{color:var(--yellow);font-weight:700;font-size:1.02rem;margin:0 0 8px}
+  .row{margin:0 0 6px;font-size:.95rem}
+  .lbl{display:inline-block;min-width:3.6em;color:var(--muted);font-size:.8rem}
+  .wrong{color:var(--red)}.right{color:var(--green)}.tip{color:var(--blue);font-weight:600}
+  .why{color:#e2e8f0}
+  .svc{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .svc span{font-size:.75rem;color:var(--blue);background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:3px 8px}
+  footer{max-width:920px;margin:0 auto;padding:8px 14px 28px;color:var(--muted);font-size:.8rem}
+  .empty{padding:28px;text-align:center;color:var(--muted);background:#111827;border-radius:14px}
+  .navs{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header>
+  <div class="in">
+    <h1>錯題複習 · AWS <span>SAA-C03</span></h1>
+    <div class="navs">
+      <a class="btn" href="memory.html">記憶卡</a>
+      <a class="btn" href="./">回溫書站</a>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="score" id="score"></div>
+  <div class="legend">
+    <i class="r">紅＝你揀錯</i>
+    <i class="g">綠＝正確</i>
+    <i class="y">黃＝陷阱關鍵字</i>
+    <i class="b">藍＝服務一句／口訣</i>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <input class="search" id="q" type="search" placeholder="搜尋：例如 ONTAP、Macie、FIFO、Multi-AZ…" enterkeyhint="search">
+  <p class="meta" id="meta"></p>
+  <div class="grid" id="grid"></div>
+</main>
+<footer>
+  整理自你 2026-11-02 Tutorials Dojo Randomized 65 題錯題（39 題）。非官方，與 AWS／Tutorials Dojo 無隸屬。
+</footer>
+<script src="js/wrongs-data.js"></script>
+<script>
+(() => {
+  const pack = window.WRONGS_PACK;
+  const tabs = document.getElementById("tabs");
+  const grid = document.getElementById("grid");
+  const meta = document.getElementById("meta");
+  const q = document.getElementById("q");
+  const score = document.getElementById("score");
+  let clusterId = (location.hash || "#ALL").slice(1).toUpperCase();
+  if (!pack.clusters.some(c => c.id === clusterId)) clusterId = "ALL";
+
+  score.innerHTML = `<div><strong>65題 Randomized</strong> · ${pack.meta.score} · ${pack.meta.date} · 用時 ${pack.meta.time}</div>
+    <div style="margin-top:4px;font-size:.9rem;color:var(--muted)">弱域 <span class="weak">${pack.meta.weakest}</span> · Cost ${pack.meta.domains.Cost} · Resilient ${pack.meta.domains.Resilient} · Secure ${pack.meta.domains.Secure}</div>`;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  }
+
+  function hay(card) {
+    return [card.id, card.concept, card.scenario, card.picked, card.correct, card.why, card.mnemonic,
+      ...(card.services||[]).flatMap(s => [s.name, s.blurb])].join(" ").toLowerCase();
+  }
+
+  function renderTabs() {
+    tabs.innerHTML = pack.clusters.map(c => {
+      const n = c.id === "ALL" ? pack.cards.length : pack.cards.filter(x => x.cluster === c.id).length;
+      return `<button class="btn ${c.id===clusterId?"on":""}" data-id="${c.id}">${esc(c.title)} (${n})</button>`;
+    }).join("");
+    tabs.querySelectorAll("button").forEach(b => b.onclick = () => {
+      clusterId = b.dataset.id;
+      history.replaceState(null, "", "#" + clusterId);
+      renderTabs(); render();
+    });
+  }
+
+  function render() {
+    const cl = pack.clusters.find(c => c.id === clusterId);
+    const term = q.value.trim().toLowerCase();
+    let items = pack.cards.filter(c => clusterId === "ALL" || c.cluster === clusterId);
+    if (term) items = items.filter(c => hay(c).includes(term));
+    meta.textContent = `${cl.title} · ${cl.blurb} · 顯示 ${items.length} 張`;
+    if (!items.length) {
+      grid.innerHTML = `<div class="empty">無符合「${esc(q.value)}」</div>`;
+      return;
+    }
+    grid.innerHTML = items.map(c => {
+      const svcs = (c.services||[]).map(s => `<span title="${esc(s.blurb)}">${esc(s.name)}：${esc(s.blurb)}</span>`).join("");
+      return `<article class="mc">
+        <p class="k"><span class="qid">Q${c.id}</span>${esc(c.concept)}</p>
+        <p class="row"><span class="lbl">情境</span>${esc(c.scenario)}</p>
+        <p class="row"><span class="lbl">你揀</span><span class="wrong">${esc(c.picked)}</span></p>
+        <p class="row"><span class="lbl">正確</span><span class="right">${esc(c.correct)}</span></p>
+        <p class="row"><span class="lbl">點解</span><span class="why">${esc(c.why)}</span></p>
+        <p class="row"><span class="lbl">口訣</span><span class="tip">${esc(c.mnemonic)}</span></p>
+        <div class="svc">${svcs}</div>
+      </article>`;
+    }).join("");
+  }
+
+  q.addEventListener("input", render);
+  window.addEventListener("hashchange", () => {
+    clusterId = (location.hash || "#ALL").slice(1).toUpperCase();
+    if (!pack.clusters.some(c => c.id === clusterId)) clusterId = "ALL";
+    renderTabs(); render();
+  });
+  renderTabs(); render();
+})();
+</script>
+</body>
+</html>
