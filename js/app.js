@@ -662,6 +662,7 @@ function home() {
       <button class="mode feat" data-go="quiz"><span class="ic">📝</span><b>${esc(t("practice"))}</b><span class="muted small">${esc(t("practice_sub"))}</span></button>
       <button class="mode" data-go="cards"><span class="ic">🎴</span><b>${esc(t("cards"))}</b><span class="muted small">${CARDS.length} ${esc(t("cards_sub"))}</span></button>
       <button class="mode" data-go="progress"><span class="ic">📊</span><b>${esc(t("progress"))}</b><span class="muted small">${esc(t("progress_sub"))}</span></button>
+      <a class="mode" href="memory.html" style="text-decoration:none;color:inherit"><span class="ic">🧠</span><b>${lang==="zh"?"彩色記憶卡":"Memory sheets"}</b><span class="muted small">${lang==="zh"?"陷阱→正解速查":"Traps → answers"}</span></a>
     </div>
     <section class="card" style="margin-top:16px">
       <h3>${esc(t("suggest"))}</h3>
